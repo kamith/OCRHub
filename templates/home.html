@@ -1,16 +1,23 @@
-<!doctype html>  
+<!doctype html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <title>Auth0 Example</title>
-  </head>
-  <body>
-    {% if session %}
-    <h1>Welcome {{session.userinfo.name}}!</h1>
-    <p><a href="/logout" id="qsLogoutBtn">Logout</a></p>
-    <div><pre>{{pretty}}</pre></div>
+</head>
+<body>
+    {% if error_info %}
+        <div class="error-message">
+            <h2>An error occurred</h2>
+            <p>We're sorry, but something went wrong. Please try again later.</p>
+            <pre>{{ error_info }}</pre>
+        </div>
+    {% elif session %}
+        <h1>Welcome {{ session.userinfo.name }}!</h1>
+        <p><a href="/logout" id="qsLogoutBtn">Logout</a></p>
+        <div><pre>{{ pretty }}</pre></div>
     {% else %}
-    <h1 id="profileDropDown">Welcome Guest</h1>
-    <p><a href="/login" id="qsLoginBtn">Login</a></p>
+        <h1 id="profileDropDown">Welcome Guest</h1>
+        <p><a href="/login" id="qsLoginBtn">Login</a></p>
     {% endif %}
-  </body>
+</body>
 </html>
