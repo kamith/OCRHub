@@ -36,6 +36,7 @@
 """
 
 import json
+import traceback
 from os import environ as env
 from urllib.parse import quote_plus, urlencode
 
@@ -103,6 +104,14 @@ def logout():
             quote_via=quote_plus,
         )
     )
+
+@app.errorhandler(500)
+def internal_error(error):
+    error_info = traceback.format_exc()
+    # Log the error information for debugging
+    print(error_info)
+    # You can render a custom template or just return a message
+    return render_template("500_error.html", error_info=error_info), 500
 
 
 if __name__ == "__main__":
