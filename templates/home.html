@@ -15,6 +15,11 @@
         <h1>Welcome {{ session.userinfo.name }}!</h1>
         <p><a href="/logout" id="qsLogoutBtn">Logout</a></p>
         <div><pre>{{ pretty }}</pre></div>
+        <form action="{{ url_for('hello') }}" method="post">
+            <label for="name">Enter your name:</label>
+            <input type="text" id="name" name="name">
+            <input type="submit" value="Submit">
+        </form>
     {% else %}
         <h1 id="profileDropDown">Welcome Guest</h1>
         <p><a href="/login" id="qsLoginBtn">Login</a></p>
