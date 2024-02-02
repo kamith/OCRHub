@@ -6,6 +6,7 @@ import os
 from os import environ as env
 from urllib.parse import quote_plus, urlencode
 from flask import Flask, redirect, render_template, session, url_for, request, abort
+from authlib.integrations.base_client.errors import OAuthError
 from flask_talisman import Talisman
 from authlib.integrations.flask_client import OAuth
 from dotenv import find_dotenv, load_dotenv
@@ -60,17 +61,21 @@ def login():
 
 @app.route("/callback", methods=["GET", "POST"])
 def callback():
-    token = oauth.auth0.authorize_access_token()
-    nonce = session.get('nonce')  # Retrieve nonce from session
-    user_info = oauth.auth0.parse_id_token(token, nonce)
-    user_email = user_info.get('email')
-    
-    allowed_emails = ['user1@example.com', 'kvml96@gmail.com']
-    if user_email not in allowed_emails:
-        return redirect(url_for('unauthorized'))  # Redirect to an unauthorized access page
+    try:
+        # Process the OAuth callback and extract the user info from the token
+        token = oauth.auth0.authorize_access_token()
+        nonce = session.get('nonce')  # Retrieve nonce from session
+        user_info = oauth.auth0.parse_id_token(token, nonce)
+        
+        # Store the user info in the session
+        session["user"] = user_info
 
-    session["user"] = token
-    return redirect("/")
+        # Redirect to the hello page instead of home
+        return redirect(url_for('hello'))
+    except OAuthError as error:
+        print(f"OAuthError: {error.error}: {error.description}")
+        return redirect(url_for('unauthorized'))
+
 
 @app.route("/logout")
 def logout():
@@ -80,19 +85,20 @@ def logout():
         f'https://{env.get("AUTH0_DOMAIN")}/v2/logout?' + urlencode(params, quote_via=quote_plus)
     )
 
-@app.route('/hello', methods=['POST'])
+@app.route('/hello', methods=['GET', 'POST'])
 def hello():
     if not is_logged_in():
         return redirect(url_for('login'))
-
-    name = request.form.get('name')
-    validate_name(name)  # Input validation
-    if name:
-        print(f'Request for hello page received with name={name}')
-        return render_template('hello.html', name=name)
+    
+    if request.method == 'POST':
+        name = request.form.get('name')
+        validate_name(name)  # Input validation
     else:
-        print('Request for hello page received with no name or blank name -- redirecting')
-        return redirect(url_for('home'))
+        # Default behavior for GET request
+        name = session.get("user", {}).get("name", "Guest")
+    
+    return render_template('hello.html', name=name)
+
 
 @app.errorhandler(400)
 def bad_request(error):
@@ -106,7 +112,8 @@ def internal_error(error):
 
 @app.route("/unauthorized")
 def unauthorized():
-    return "Unauthorized Access", 403
+    # Render the unauthorized.html template instead of returning a simple string
+    return render_template("unauthorized.html"), 403
 
 if __name__ == "__main__":
     app.run(host="localhost", port=3000, ssl_context='adhoc')
