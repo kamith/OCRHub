@@ -3,6 +3,7 @@ import traceback
 import re
 import base64
 import os
+import sass
 from os import environ as env
 from urllib.parse import quote_plus, urlencode
 from flask import Flask, redirect, render_template, session, url_for, request, abort
@@ -18,6 +19,7 @@ if ENV_FILE:
 app = Flask(__name__)
 app.secret_key = env.get("APP_SECRET_KEY")
 Talisman(app)  # Enables HTTPS and sets security headers
+has_run_once = False
 
 # Initialize OAuth with Okta configuration using Auth0 variable names
 oauth = OAuth(app)
@@ -28,6 +30,30 @@ oauth.register(
     client_kwargs={"scope": "openid profile email"},
     server_metadata_url=f'https://{env.get("AUTH0_DOMAIN")}/.well-known/openid-configuration', # Replace AUTH0_DOMAIN with your Okta domain
 )
+
+def compile_scss():
+    """Compiles SCSS files into CSS at the specified directory."""
+    input_dir = os.path.join(app.static_folder, 'scss')  # Path to your SCSS files
+    output_dir = os.path.join(app.static_folder, 'css')  # Path where CSS files should go
+    if not os.path.exists(output_dir):
+        os.makedirs(output_dir)
+    for scss_file in os.listdir(input_dir):
+        if scss_file.endswith('.scss'):
+            input_file_path = os.path.join(input_dir, scss_file)
+            output_file_path = os.path.join(output_dir, scss_file.replace('.scss', '.css'))
+            css_content = sass.compile(filename=input_file_path)
+            with open(output_file_path, 'w') as file:
+                file.write(css_content)
+    print("SCSS files compiled successfully.")
+
+@app.before_request
+def before_first_request():
+    global has_run_once
+    if not has_run_once:
+        # Your code here, e.g., compile_scss()
+        print("Running once before the first request.")
+        has_run_once = True
+        compile_scss()
 
 # Helper function to check if user is logged in
 def is_logged_in():

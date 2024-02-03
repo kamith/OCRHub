@@ -1,0 +1,98 @@
+/* Variables */
+$primary-bg-color: rgba(255, 255, 255, 0.8); // Semi-transparent white
+$primary-text-color: #000; // Change text color to black
+$button-bg-color: #000;
+$button-text-color: #fff;
+$container-bg-color: #fff;
+$semi-transparent-bg-color: rgba(255, 255, 255, 0.5); // Semi-transparent white
+
+/* Global Styles */
+body, h1, h2, p, button {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+/* Body */
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('../images/background.png') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Wrapper */
+.wrapper {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 600px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* Welcome Section */
+.welcome-section {
+    flex: 1;
+    background-color: $semi-transparent-bg-color;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: $primary-text-color; // Use black color for text
+
+    .quote {
+        margin-bottom: 20px;
+        opacity: 0.85;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 3em;
+    }
+
+    .message {
+        font-size: 1.2em;
+    }
+}
+
+/* Login Section */
+.login-section {
+    flex: 1;
+    background-color: $container-bg-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+
+    .login-container {
+        text-align: center;
+        max-width: 400px;
+
+        h2 {
+            margin-bottom: 20px;
+            color: $button-bg-color;
+        }
+
+        p {
+            margin-bottom: 40px;
+            color: $button-bg-color;
+        }
+
+        .login-button {
+            background-color: $button-bg-color;
+            color: $button-text-color;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+
+            &:hover {
+                background-color: lighten($button-bg-color, 10%);
+            }
+        }
+    }
+}

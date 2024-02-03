@@ -2,23 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Auth0 Example</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='/style.css') }}">
+    <title>Welcome to OCR Hub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <div class="container">
-        {% if error_info %}
-            <div class="error-message">
-                <h2>Error</h2>
-                <p>{{ error_info }}</p>
+    <div class="wrapper">
+        <div class="welcome-section">
+            <p class="quote">A WISE QUOTE</p>
+            <h1>Get Everything You Want</h1>
+            <p class="message">You can get everything you want if you work hard, trust the process, and stick to the plan.</p>
+        </div>
+        <div class="login-section">
+            <div class="login-container">
+                <h2>Welcome Back</h2>
+                <p>Access your account with a single click.</p>
+                <a href="{{ url_for('login') }}" class="login-button">Login</a>
             </div>
-        {% elif session.get('userinfo') %}
-            <h1>Welcome {{ session['userinfo'].get('name', 'Guest') }}</h1>
-            <p><a href="/logout">Logout</a></p>
-        {% else %}
-            <h1>Welcome Guest</h1>
-            <p><a href="/login">Login</a></p>
-        {% endif %}
+        </div>
     </div>
 </body>
 </html>
