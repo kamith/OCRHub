@@ -9,14 +9,12 @@
 <body>
     <div class="wrapper">
         <div class="welcome-section">
-            <p class="quote">A WISE QUOTE</p>
-            <h1>Get Everything You Want</h1>
-            <p class="message">You can get everything you want if you work hard, trust the process, and stick to the plan.</p>
+            <img src="{{ url_for('static', filename='images/ocr.png') }}" alt="OCR Logo" class="welcome-image">
         </div>
         <div class="login-section">
             <div class="login-container">
-                <h2>Welcome Back</h2>
-                <p>Access your account with a single click.</p>
+                <h2>Welcome to OCR Hub</h2>
+                <p class="login-message">Access your account with a single click.</p>
                 <a href="{{ url_for('login') }}" class="login-button">Login</a>
             </div>
         </div>

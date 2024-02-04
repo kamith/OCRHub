@@ -1,0 +1,126 @@
+// Variables
+$primary-bg-color: rgba(255, 255, 255, 0.8); // Semi-transparent white
+$primary-text-color: #000; // Black text color for better contrast
+$button-bg-color: #000; // Black background for button
+$button-text-color: #fff; // White text color for button
+$container-bg-color: #fff; // Solid white background for login section
+$semi-transparent-bg-color: rgba(255, 255, 255, 0.5); // Semi-transparent white
+
+// Global Styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; // Ensures padding does not affect overall width
+}
+
+body, h1, h2, p, a, button {
+  font-family: 'Arial', sans-serif;
+  color: $primary-text-color;
+  text-align: center;
+}
+
+body {
+  background-color: $container-bg-color; // White background
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+// Container and Content Box Styles
+.content-container {
+  text-align: center;
+  background-color: $container-bg-color;
+  padding: 20px;
+  display: flex; // Align items horizontally
+  flex-wrap: wrap; // Wrap items if necessary
+  justify-content: space-around; // Space items evenly
+  width: 100%; // Ensure container takes full width for proper spacing
+}
+
+.box-container {
+  width: calc(33.33% - 20px); // Adjust width for 3 containers in a row
+  padding: 10px;
+  box-sizing: border-box; // Include padding in the width calculation
+  display: flex; // Flex display for vertical alignment
+  flex-direction: column; // Stack items vertically
+  align-items: center; // Center items horizontally
+}
+
+.content-box {
+    padding: 20px; // Adjust padding as needed
+    position: relative; // Needed for absolute positioning of elements inside
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  
+
+.content-box.active {
+    transform: scale(1.5); // Enlarges the box by 50%
+  }
+
+.indicators {
+  display: flex;
+  justify-content: center; // Center dots directly below content box
+  margin-top: 20px; // Adjust this value as needed to lower the dots
+}
+
+.dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #bbb;
+  margin: 0 5px;
+  cursor: pointer;
+
+  &.active {
+    background-color: #717171; // Darker color for active dot
+  }
+}
+
+.box-image {
+    width: 100px; // Set a fixed width
+    height: 100px; // Set a fixed height
+    object-fit: cover; // Cover will ensure the aspect ratio is maintained without stretching the image
+    margin-bottom: 10px; // Space between image and text
+  }
+  
+
+// Button Styles
+#start-ocr {
+  background-color: $button-bg-color;
+  color: $button-text-color;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 1.8em; // Larger font size for prominence
+  margin: 20px 0;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: background-color 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    background-color: darken($button-bg-color, 10%);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Media Query for Responsiveness
+@media (max-width: 768px) {
+  .content-container {
+    flex-direction: column;
+    align-items: center; // Center items on smaller screens
+  }
+
+  .box-container {
+    width: 100%; // Full width for mobile layout
+    margin-bottom: 20px; // Add space between vertically stacked items
+  }
+
+  .content-box {
+    padding: 40px; // Adjust padding for smaller screens
+  }
+}

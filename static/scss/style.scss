@@ -1,56 +1,60 @@
-/* Variables */
+// Variables
 $primary-bg-color: rgba(255, 255, 255, 0.8); // Semi-transparent white
-$primary-text-color: #000; // Change text color to black
-$button-bg-color: #000;
-$button-text-color: #fff;
-$container-bg-color: #fff;
+$primary-text-color: #000; // Black text color for better contrast
+$button-bg-color: #000; // Black background for button
+$button-text-color: #fff; // White text color for button
+$container-bg-color: #fff; // Solid white background for login section
 $semi-transparent-bg-color: rgba(255, 255, 255, 0.5); // Semi-transparent white
 
-/* Global Styles */
-body, h1, h2, p, button {
+// Global Styles
+* {
     margin: 0;
     padding: 0;
-    border: none;
+    box-sizing: border-box; // Ensures padding does not affect overall width
 }
 
-/* Body */
-body {
+body, h1, h2, p, a, button {
     font-family: 'Arial', sans-serif;
-    background: url('../images/background.png') no-repeat center center fixed;
-    background-size: cover;
-    height: 100vh;
+    color: $primary-text-color;
+    text-align: center;
+}
+
+body {
+    background-color: $container-bg-color; // White background
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
 }
 
-/* Wrapper */
+// Wrapper for the entire content
 .wrapper {
     display: flex;
     width: 80%;
     max-width: 1200px;
-    height: 600px;
+    min-height: 600px; // Use min-height for flexibility
     box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    overflow: hidden; // Prevents any child element from overflowing
 }
 
-/* Welcome Section */
+// Welcome Section
 .welcome-section {
-    flex: 1;
+    flex-basis: 50%; // Takes half the width of the wrapper
     background-color: $semi-transparent-bg-color;
     padding: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: $primary-text-color; // Use black color for text
-
-    .quote {
-        margin-bottom: 20px;
-        opacity: 0.85;
+    
+    .welcome-image {
+        max-width: 100%; // Ensures the image is responsive and fits the container
+        height: auto; // Maintains the aspect ratio of the image
+        margin-bottom: 20px; // Space between the image and the heading
     }
 
     h1 {
         margin-bottom: 20px;
-        font-size: 3em;
+        font-size: 3em; // Large font size for the main heading
     }
 
     .message {
@@ -58,41 +62,231 @@ body {
     }
 }
 
-/* Login Section */
+// Login Section
 .login-section {
-    flex: 1;
+    flex-basis: 50%;
     background-color: $container-bg-color;
     display: flex;
-    justify-content: center;
     align-items: center;
-    padding: 40px;
+    justify-content: center;
+    padding: 20px; // Reduced padding to decrease white space
 
     .login-container {
+        max-width: 400px; // Set a max-width to constrain the content width
         text-align: center;
-        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         h2 {
-            margin-bottom: 20px;
+            font-size: 2.5em; // Larger font size for heading
             color: $button-bg-color;
+            margin: 0 0 10px; // Reduced margin-bottom
         }
 
-        p {
-            margin-bottom: 40px;
-            color: $button-bg-color;
+        .login-message {
+            font-size: 1.5em; // Larger font size for message
+            margin-bottom: 30px; // Adjust margin to reduce white space
         }
 
         .login-button {
             background-color: $button-bg-color;
             color: $button-text-color;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1em;
-            transition: background-color 0.3s ease;
+            padding: 15px 30px; // Larger padding for a bigger button
+            border-radius: 8px; // Slightly more rounded corners for the button
+            font-weight: bold; // Bold font weight for the button text
+            font-size: 1.2em; // Larger font size for the button text
+            text-decoration: none;
+            display: block; // Change to block to fill the width of the container
+            width: 100%; // Full width button
+            box-shadow: 4px 4px 10px rgba(0,0,0,0.2); // Subtle shadow for depth
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
 
             &:hover {
                 background-color: lighten($button-bg-color, 10%);
+                box-shadow: 6px 6px 15px rgba(0,0,0,0.3); // Larger shadow on hover
             }
         }
+    }
+}
+
+
+// Media Query for Mobile Responsiveness
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        width: 95%;
+        min-height: initial; // Resets the min-height for mobile
+        margin: 20px; // Add margin around the wrapper on small screens
+    }
+
+    .welcome-section,
+    .login-section {
+        flex-basis: auto; // Reset the width to auto
+    }
+
+    h1 {
+        font-size: 2.5em; // Adjust font size for mobile
+    }
+
+    .login-container {
+        padding: 20px; // Adjust padding for mobile
+    }
+}
+
+
+.carousel-container {
+    position: relative;
+    margin: auto;
+    max-width: 1200px; // Maximum width of the carousel
+}
+
+.carousel {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 20px 0;
+    overflow: hidden;
+}
+
+.box {
+    width: 30%; // Larger boxes
+    margin: 20px; // Space between boxes
+    padding: 20px;
+    background-color: $semi-transparent-bg-color;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.indicators {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+
+    .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background-color: #bbb;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &.active {
+            background-color: #717171;
+        }
+    }
+}
+
+#start-ocr {
+    background-color: $button-bg-color;
+    color: $button-text-color;
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-size: 1.8em; // More prominent button text
+    margin: 20px 0;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        background-color: darken($button-bg-color, 10%);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+// Media Query for Mobile Responsiveness
+@media (max-width: 768px) {
+    .carousel {
+        flex-direction: column;
+    }
+
+    .box {
+        width: 80%; // Full width on mobile
+        margin: 10px auto;
+    }
+
+    .indicators, #start-ocr {
+        width: 80%; // Full width on mobile
+        margin: 10px auto;
+    }
+}
+
+
+.content-container {
+    text-align: center;
+    background-color: $container-bg-color;
+    padding: 20px;
+}
+
+.content-boxes {
+    display: flex;
+    justify-content: space-around; /* Adjusted to space-around for better distribution */
+    flex-wrap: wrap; /* Allows items to wrap if needed */
+    margin-bottom: 20px;
+}
+
+.content-box {
+    width: calc(100% / 3 - 30px); /* Adjusted width to accommodate 3 boxes in a row */
+    padding: 80px; /* Increased padding to make box 4 times larger. Adjust as necessary */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px; /* Added for spacing between box and dots */
+    position: relative; /* For positioning dots relative to the boxes */
+}
+
+.indicators {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto; /* Centered indicators */
+    flex-wrap: wrap; /* Allow indicators to wrap if needed */
+}
+
+.dot {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background-color: #bbb;
+    margin: 5px; /* Adjusted margin for spacing */
+    cursor: pointer;
+}
+
+.dot.active {
+    background-color: #717171;
+}
+
+/* Position dots directly below each content box */
+/* This assumes each .content-box now wraps its corresponding .dot(s) */
+/* If .dot cannot be nested inside .content-box in your HTML, this approach needs adjusting */
+.content-box + .indicators { /* Adjust this selector based on your HTML structure */
+    position: absolute;
+    bottom: -25px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+@media (max-width: 768px) {
+    .content-boxes {
+        flex-direction: column;
+    }
+
+    .content-box {
+        width: 80%; /* Full width on mobile with some margin */
+        margin: 10px auto;
+        padding: 40px; /* Adjust padding for mobile */
+    }
+
+    /* Ensure dots are still positioned correctly on mobile */
+    .content-box + .indicators {
+        position: static;
+        transform: none;
+        margin-top: 10px;
     }
 }
