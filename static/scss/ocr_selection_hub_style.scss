@@ -1,7 +1,7 @@
 // Variables
 $primary-bg-color: rgba(255, 255, 255, 0.8); // Semi-transparent white
 $primary-text-color: #000; // Black text color for better contrast
-$button-bg-color: #000; // Black background for button
+$button-bg-color: #597ef7; // Black background for button
 $button-text-color: #fff; // White text color for button
 $container-bg-color: #fff; // Solid white background for login section
 $semi-transparent-bg-color: rgba(255, 255, 255, 0.5); // Semi-transparent white
@@ -36,6 +36,11 @@ body {
   flex-wrap: wrap; // Wrap items if necessary
   justify-content: space-around; // Space items evenly
   width: 100%; // Ensure container takes full width for proper spacing
+  margin: auto;
+  max-width: 1200px; // Set a max-width for larger screens
+  height: auto; // Override height to be auto
+  min-height: 100vh; // Ensure it's at least the height of the viewport
+
 }
 
 .box-container {
@@ -80,33 +85,39 @@ body {
     background-color: #717171; // Darker color for active dot
   }
 }
-
-.box-image {
-    width: 100px; // Set a fixed width
-    height: 100px; // Set a fixed height
-    object-fit: cover; // Cover will ensure the aspect ratio is maintained without stretching the image
-    margin-bottom: 10px; // Space between image and text
-  }
   
+.box-image {
+  object-fit: cover; // This will cover the area, cropping the image if necessary
+  width: 100px; // Set a fixed width
+  height: 100px; // Set a fixed height
+  margin-bottom: 10px; // Space between image and text
+}
+
 
 // Button Styles
 #start-ocr {
   background-color: $button-bg-color;
   color: $button-text-color;
-  padding: 15px 30px;
+  padding: 10px 20px; /* Reduced top and bottom padding */
   border-radius: 5px;
-  font-size: 1.8em; // Larger font size for prominence
+  font-size: 1em; /* Adjust font size if it's too large */
   margin: 20px 0;
   cursor: pointer;
   border: none;
   outline: none;
   transition: background-color 0.3s, box-shadow 0.3s;
+  height: 50px; /* Fixed height, adjust as needed */
+  width: 200px; /* Fixed width, adjust as needed */
+  display: inline-block;
+  text-align: center;
+  line-height: 30px; /* Adjust line height to vertically center the text in the button */
 
   &:hover {
     background-color: darken($button-bg-color, 10%);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }
+
 
 // Media Query for Responsiveness
 @media (max-width: 768px) {

@@ -64,13 +64,19 @@ def validate_name(name):
     if not re.match("^[a-zA-Z ]*$", name):
         abort(400)  # Bad Request if name is not valid
 
+# @app.route("/")
+# def landing_page():
+#     return render_template(
+#         "landing_page.html",
+#         session=session.get("user"),
+#         pretty=json.dumps(session.get("user"), indent=4),
+#     )
+
+#temp route for testing
 @app.route("/")
-def home():
-    return render_template(
-        "home.html",
-        session=session.get("user"),
-        pretty=json.dumps(session.get("user"), indent=4),
-    )
+def landing_page():
+    # Redirect to the selection page instead of rendering home.html
+    return redirect(url_for('selection_page'))
 
 def generate_nonce(length=16):
     """Generate a random string for nonce."""
@@ -96,8 +102,8 @@ def callback():
         # Store the user info in the session
         session["user"] = user_info
 
-        # Redirect to the hello page instead of home
-        return redirect(url_for('hello'))
+        # Redirect to the selection hub page instead of the landing page
+        return redirect(url_for('selection_page'))
     except OAuthError as error:
         print(f"OAuthError: {error.error}: {error.description}")
         return redirect(url_for('unauthorized'))
@@ -106,13 +112,13 @@ def callback():
 @app.route("/logout")
 def logout():
     session.clear()
-    params = {"returnTo": url_for("home", _external=True), "client_id": env.get("AUTH0_CLIENT_ID")}
+    params = {"returnTo": url_for("ocr_hub_landing_page", _external=True), "client_id": env.get("AUTH0_CLIENT_ID")}
     return redirect(
         f'https://{env.get("AUTH0_DOMAIN")}/v2/logout?' + urlencode(params, quote_via=quote_plus)
     )
 
-@app.route('/hello', methods=['GET', 'POST'])
-def hello():
+@app.route('/selection_page', methods=['GET', 'POST'])
+def selection_page():
     if not is_logged_in():
         return redirect(url_for('login'))
     
@@ -123,8 +129,16 @@ def hello():
         # Default behavior for GET request
         name = session.get("user", {}).get("name", "Guest")
     
-    return render_template('hello.html', name=name)
+    return render_template('selection_hub.html', name=name)
 
+@app.route('/ocr_chat', methods=['POST'])
+def ocr_chat():
+    if not is_logged_in():
+        return redirect(url_for('login'))
+    
+    selected_option = request.form.get('selected_option')
+    # Now, you can use the selected_option to do whatever is needed on the ocr_chat page
+    return render_template('ocr_chat.html', selected_option=selected_option)
 
 @app.errorhandler(400)
 def bad_request(error):

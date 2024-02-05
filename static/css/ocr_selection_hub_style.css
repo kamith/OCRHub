@@ -64,24 +64,34 @@ body {
     background-color: #717171; }
 
 .box-image {
+  object-fit: cover;
   width: 100px;
   height: 100px;
-  object-fit: cover;
   margin-bottom: 10px; }
 
 #start-ocr {
-  background-color: #000;
+  background-color: #597ef7;
   color: #fff;
-  padding: 15px 30px;
+  padding: 10px 20px;
+  /* Reduced top and bottom padding */
   border-radius: 5px;
-  font-size: 1.8em;
+  font-size: 1em;
+  /* Adjust font size if it's too large */
   margin: 20px 0;
   cursor: pointer;
   border: none;
   outline: none;
-  transition: background-color 0.3s, box-shadow 0.3s; }
+  transition: background-color 0.3s, box-shadow 0.3s;
+  height: 50px;
+  /* Fixed height, adjust as needed */
+  width: 200px;
+  /* Fixed width, adjust as needed */
+  display: inline-block;
+  text-align: center;
+  line-height: 30px;
+  /* Adjust line height to vertically center the text in the button */ }
   #start-ocr:hover {
-    background-color: black;
+    background-color: #2858f5;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); }
 
 @media (max-width: 768px) {
