@@ -64,19 +64,19 @@ def validate_name(name):
     if not re.match("^[a-zA-Z ]*$", name):
         abort(400)  # Bad Request if name is not valid
 
-# @app.route("/")
-# def landing_page():
-#     return render_template(
-#         "landing_page.html",
-#         session=session.get("user"),
-#         pretty=json.dumps(session.get("user"), indent=4),
-#     )
-
-#temp route for testing
 @app.route("/")
 def landing_page():
-    # Redirect to the selection page instead of rendering home.html
-    return redirect(url_for('selection_page'))
+    return render_template(
+        "landing_page.html",
+        session=session.get("user"),
+        pretty=json.dumps(session.get("user"), indent=4),
+    )
+
+# #temp route for testing
+# @app.route("/")
+# def landing_page():
+#     # Redirect to the selection page instead of rendering home.html
+#     return redirect(url_for('selection_page'))
         
      
 
