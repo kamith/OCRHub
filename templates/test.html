@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Chat Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ocr_chat_style.css') }}">
+</head>
+<body>
+    <div class="layer-container">
+        <div class="color-layer"></div>
+        <div class="color-layer"></div>
+        <div class="color-layer"></div>
+        <div class="color-layer"></div>
+        <div class="color-layer"></div>
+        <div class="color-layer"></div>
+        <div class="color-layer"></div>
+        <div class="color-layer"></div>
+
+        <div class="content-layer">
+            <img src="{{ url_for('static', filename='images/openai.png') }}" alt="OpenAI">
+            <h1>Jeffrey Martin</h1>
+        </div>
+    </div>
+</body>
+</html>

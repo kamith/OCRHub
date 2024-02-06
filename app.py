@@ -77,6 +77,8 @@ def validate_name(name):
 def landing_page():
     # Redirect to the selection page instead of rendering home.html
     return redirect(url_for('selection_page'))
+        
+     
 
 def generate_nonce(length=16):
     """Generate a random string for nonce."""

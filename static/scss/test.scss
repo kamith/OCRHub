@@ -1,0 +1,91 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #fff; // Set the overall page background to white
+}
+
+.layer-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; // Set the container to fill the entire viewport height
+    background-color: transparent; // No need to set a color here, the body is already white
+    overflow: hidden; // Ensure that the overflowing parts of rotated layers are hidden
+}
+
+.color-layer {
+    position: absolute;
+    width: 70%; // Set to 100% of the container width
+    height: 70%; // Set to 100% of the viewport height
+    top: 50%; // Position at half the container's height
+    left: 50%; // Position at half the container's width
+    transform-origin: center; // Set the origin of transform to the center of the element
+    background-color: #000; // Default color for all layers, can be overridden individually
+
+    &:nth-child(1) { 
+        background-color: #d7d9e2; // Light grey color for the first layer
+        transform: translate(-50%, -50%) rotate(-3deg); 
+        z-index: 1; 
+    }
+    &:nth-child(2) { 
+        background-color: #c9cad7; // Darker grey color for the second layer
+        transform: translate(-50%, -50%) rotate(-5deg); 
+        z-index: 2; 
+    }
+    &:nth-child(3) { 
+        background-color: #babccc; // Even darker grey color for the third layer
+        transform: translate(-50%, -50%) rotate(-7deg); 
+        z-index: 3; 
+    }
+    &:nth-child(4) { 
+        background-color: #abaec1; // Even darker grey color for the third layer
+        transform: translate(-50%, -50%) rotate(-9deg); 
+        z-index: 4; 
+    }
+    &:nth-child(5) { 
+        background-color: #9da0b6; // Even darker grey color for the third layer
+        transform: translate(-50%, -50%) rotate(-11deg); 
+        z-index: 5; 
+    }
+    &:nth-child(6) { 
+        background-color: #8e91ab; // Even darker grey color for the third layer
+        transform: translate(-50%, -50%) rotate(-13deg); 
+        z-index: 6; 
+    }
+    &:nth-child(7) { 
+        background-color: #7f83a1; // Even darker grey color for the third layer
+        transform: translate(-50%, -50%) rotate(-15deg); 
+        z-index: 7; 
+    }
+    &:nth-child(8) { 
+        background-color: #717596; // Even darker grey color for the third layer
+        transform: translate(-50%, -50%) rotate(-17deg); 
+        z-index: 8; 
+    }
+    // ...add more layers as needed with increasing rotation and decreasing z-index
+}
+
+.content-layer {
+    position: absolute;
+    z-index: 10; // Ensure this layer is above all .color-layers
+    background-color: #cbcfef; // Black background for the content
+    width: 20%; // Adjust the width of the content area as needed
+    height: 30%; // Adjust the height of the content area as needed
+    top: 50%; // Center vertically
+    left: 50%; // Center horizontally
+    transform: translate(-50%, -50%); // Center the element in the viewport
+    padding: 50px;
+    text-align: center;
+
+    img {
+        max-width: 100px;
+        height: auto;
+        margin-bottom: 20px; // Add some space below the image
+    }
+
+    h1 {
+        color: #fff; // White text color for contrast
+        font-size: 2em;
+        font-weight: bold;
+    }
+}
+

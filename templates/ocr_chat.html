@@ -2,13 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OCR Chat</title>
+    <title>OCR Chat Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ocr_chat_style.css') }}">
 </head>
 <body>
-    <!-- Content for ocr_chat here -->
-    <p>Selected OCR Option: {{ selected_option }}</p>
-    <!-- Back Button to Selection Page -->
-    <a href="{{ url_for('selection_page') }}" class="btn btn-primary">Back to Selection</a>
+  <div class="chat-interface">
+    <header class="header">
+      <div class="logo">Your Logo Here</div>
+      <div class="title">How can I help you today?</div>
+    </header>
+    <div class="chat-container"></div>
+    <div class="options" id="options">
+      <button class="option">Write a thank-you note</button>
+      <button class="option">Help me pick a gift</button>
+      <button class="option">Suggest some names</button>
+      <button class="option">Come up with concepts</button>
+    </div>
+    <footer class="footer">
+      <input type="text" class="input-field" id="inputField" placeholder="Type your message here...">
+      <button class="send-button" id="sendButton">Send</button>
+    </footer>
+  </div>
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </body>
 </html>
